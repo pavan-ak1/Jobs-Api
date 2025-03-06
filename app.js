@@ -6,6 +6,7 @@ const app = express();
 
 const authRouter = require('./routes/auth');
 const jobsRouter = require('./routes/jobs');
+const connectDB = require('./db/connect')
 
 
 // error handler
@@ -31,6 +32,7 @@ const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
+    await connectDB(process.env.MONGO_URI)
     app.listen(port, () =>
       console.log(`Server is listening on port ${port}...`)
     );
